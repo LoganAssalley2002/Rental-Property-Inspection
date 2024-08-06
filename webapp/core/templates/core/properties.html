@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+Owl Inspection Services | Properties
+{% endblock title %}
+
+{% block extra_css %}
+  <style type="text/css">
+    .property-card:hover {
+      background-color: whitesmoke;
+    }
+  </style>
+{% endblock extra_css %}
+
+
+{% block content %}
+  <div class="container">
+    <h3 class="lead display-4 mt-1 mb-5">My Properties</h3>
+    {% for property in properties %}
+      <a href="{% url 'property_detail' property.id %}" class="card mb-2 text-decoration-none property-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ property.name }}</h5>
+          <p class="card-text">{{ property.address }}</p>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% endblock content %}

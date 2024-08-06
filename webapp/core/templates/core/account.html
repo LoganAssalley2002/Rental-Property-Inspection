@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+Owl Inspection Services | Profile
+{% endblock title %}
+
+{% block extra_css %}
+  <style type="text/css"></style>
+{% endblock extra_css %}
+
+
+{% block content %}
+  <div class="container">
+    <div class="d-flex gap-4">
+      <a href="{% url 'inspections' %}" class="btn btn-primary">Inspections</a>
+      <a href="{% url 'properties' %}" class="btn btn-primary">Properties</a>
+    </div>
+  </div>
+  <div class="container">
+  </div>
+{% endblock content %}

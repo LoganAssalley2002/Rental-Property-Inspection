@@ -1,0 +1,155 @@
+:root {
+  --primary-color: #002645;
+  --secondary-color: #00a3e0;
+}
+
+body {
+  font-family: 'Oswald', sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Oswald', sans-serif;
+}
+
+.content {
+  margin-top: 90px;
+}
+
+.nav-profile-avatar::after {
+  content: none;
+}
+
+.btn-primary {
+  color: #fff !important;
+  background-color: var(--secondary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+  border-radius: 0.25rem;
+  width: fit-content !important;
+}
+
+.alert-dismissible .btn-close {
+  padding: 1rem !important;
+}
+
+.nav-link:not(.btn-primary) {
+  color: var(--primary-color) !important;
+}
+
+.nav-link.btn-primary {
+  padding: .375rem .75rem !important;
+}
+
+
+.carousel-item {
+  transition: -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}
+
+
+
+h1 {
+  color: #00a3e0;
+}
+
+
+
+#owl {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-inner>.item {
+  -webkit-transition: 0s !important;
+  -o-transition: 0s !important;
+  transition: 0s !important;
+}
+
+.carousel-item {
+  float: none;
+  transition: 0s !important;
+}
+
+.image-container {
+  height: 300px;
+  /* Define a fixed height */
+  width: 100%;
+  /* Keep width responsive */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF;
+  /* Set a background color if desired */
+}
+
+.carousel-container {
+  max-width: 600px;
+  /* Or any width you prefer */
+  margin: auto;
+  /* Center the carousel */
+}
+
+.carousel-image {
+  max-height: 400px;
+  /* Adjust based on your needs */
+  object-fit: cover;
+  /* Preserve aspect ratios, cropping if necessary */
+}
+
+.carousel-text-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  /* Light background for readability */
+  color: #333;
+  /* Dark text color */
+  padding: 15px;
+  /* Padding for spacing */
+  margin-top: -5px;
+  /* Adjust as necessary to position correctly below the image */
+}
+
+.carousel-caption {
+  position: static;
+  /* Override Bootstrap's absolute positioning */
+  padding: 0;
+  /* Reset padding if needed */
+}
+
+
+
+
+
+
+.alert {
+  position: absolute;
+  left: 0;
+  top: 90px;
+  width: 100%;
+}
+
+
+
+@media (max-width: 577px) {
+  .content {
+    margin-top: 60px;
+  }
+}
+
+
+.invalid-feedback {
+  display: block;
+}

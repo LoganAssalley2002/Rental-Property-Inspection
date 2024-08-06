@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+Owl Inspection Services | Create Inspection
+{% endblock title %}
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+  integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+<style type="text/css">
+    .selectize-input, .selectize-input input {
+        color: inherit !important;
+        background: white !important;
+        font-size: inherit !important;
+        font-family: inherit !important;
+    }
+
+    .selectize-dropdown-content {
+        font-family: inherit !important;
+        font-size: 1rem !important;
+    }
+
+    label:not([for*="id_name"]) {
+        margin-top: 1rem;
+    }
+</style>
+{% endblock extra_css %}
+
+
+{% block content %}
+  <div class="container">
+    <h3 class="lead display-4 mt-1 mb-5">Create New Inspection</h3>
+    <form method="post">
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div class="mb-3">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% for error in field.errors %}
+            <div class="invalid-feedback{% if forloop.last %} mb-2{% endif %}">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-lg btn-primary mt-4 mb-3 login-button" type="submit">{{ button_text }}</button>
+      </div>
+    </form>
+  </div>
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+      integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      $(function () {
+        $("#id_inspector").selectize();
+      });
+      $(function () {
+        $("#id_inspected_user").selectize();
+      });
+    </script>
+    <script type="text/javascript" src="{% static 'core/js/uploadInspection.js' %}"></script>
+{% endblock extra_js %}

@@ -1,0 +1,142 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+Owl Inspection Services | Add Inspection Area
+{% endblock title %}
+
+{% block extra_css %}
+  <style type="text/css">
+    .area-image {
+      width: 180px;
+      height: 180px;
+      overflow: hidden;
+    }
+
+    .area-image:hover {
+      background-color: whitesmoke;
+    }
+  </style>
+{% endblock extra_css %}
+
+
+{% block content %}
+  
+  <!-- HIDDEN FILE INPUT -->
+  <input type="file" id="hidden-file-input" class="d-none">
+
+  <div class="container">
+    <h3 class="lead display-4 mt-1 mb-5">Add Inspection Area</h3>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div class="mb-3">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% for error in field.errors %}
+            <div class="invalid-feedback{% if forloop.last %} mb-2{% endif %}">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <h5>Add Area Images</h5>
+      <div class="d-flex gap-3 flex-wrap w-100 area-images">
+
+        {% for area_picture in area_pictures %}
+          <div class="area-image shadow rounded-4 d-flex justify-content-center align-items-center">
+            {{ area_picture }}
+          </div>
+        {% endfor %}
+        <div class="area-image shadow rounded-4 d-flex justify-content-center align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+          </svg>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-lg btn-primary mt-4 mb-3 login-button" type="submit" name="add-another">Save and add Another</button>
+        <button class="btn btn-lg btn-primary mt-4 mb-3 login-button" type="submit" name="finish">Save and Finish</button>
+      </div>
+    </form>
+
+  </div>
+{% endblock content %}
+
+
+{% block extra_js %}
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.area-image').forEach(el => el.addEventListener('click', triggerUpload));
+    document.querySelector('#hidden-file-input').addEventListener('change', uploadAreaImage);
+  });
+
+  const triggerUpload = (event) => {
+    document.querySelector('#hidden-file-input').click();
+  }
+
+  const uploadAreaImage = (event) => {
+    // Create input element (diplay:none;) and append to form so we can retrieve it in the backend on form.submit
+    let input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('name', 'area-picture');
+    input.classList = 'd-none';
+    input.files = event.target.files;
+    document.querySelector('form').appendChild(input);
+
+    // Create preview
+    let div = document.createElement('div');
+    div.classList = 'area-image shadow rounded-4 d-flex justify-content-center align-items-center';
+    
+    const reader = new FileReader();
+    let file = event.target.files[0];
+    let img = document.createElement('img');
+    img.style.width = 'inherit';
+
+    reader.addEventListener(
+      'load',
+      () => {
+        // convert image file to base64 string
+        img.src = reader.result;
+      },
+      false,
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+
+    div.appendChild(img);
+    document.querySelector('.area-images').insertBefore(div, document.querySelector('.area-images').firstChild);
+  }
+</script>
+{% endblock extra_js %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

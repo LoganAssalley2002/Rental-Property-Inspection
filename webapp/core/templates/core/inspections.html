@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+Owl Inspection Services | Inspections
+{% endblock title %}
+
+{% block extra_css %}
+  <style type="text/css">
+    .property-card:hover {
+      background-color: whitesmoke;
+    }
+  </style>
+{% endblock extra_css %}
+
+
+{% block content %}
+  <div class="container">
+    <h3 class="lead display-4 mt-1 mb-5">My Inspections</h3>
+    {% for inspection in inspections %}
+      <a href="{% url 'inspection_detail' inspection.id %}" class="card mb-2 text-decoration-none inspection-card">
+        <div class="card-body">
+          {% if inspection.is_completed %}
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5 class="card-title">{{ inspection.inspected_property.address }}</h5>
+                <p class="card-text">{{ inspection.created_at }}</p>
+              </div>
+              <span class="badge text-bg-success align-self-center h-fit">Completed</span>
+            </div>
+          {% else %}
+            <div class="d-flex justify-content-between">
+              <div>
+                {% if inspection.inspected_property %}
+                  <h5 class="card-title">{{ inspection.inspected_property.address }}</h5>
+                {% else %}
+                  <h5 class="card-title">Unknown</h5>
+                {% endif %}
+                <p class="card-text">{{ inspection.created_at }}</p>
+              </div>
+              <span class="badge text-bg-warning align-self-center h-fit">In Progress</span>
+            </div>
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% endblock content %}

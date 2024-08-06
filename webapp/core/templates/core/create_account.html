@@ -1,0 +1,220 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+Owl Inspection Services | Create Account
+{% endblock title %}
+
+{% block extra_css %}
+  <style type="text/css">
+    nav {
+      display: none !important;
+    }
+
+    .content {
+      height: 100% !important;
+      width: 100% !important;
+      margin: 0 !important;
+    }
+    
+    html, body {
+      height: 100% !important;
+    }
+
+    .w-40 {
+      width: 40% !important;
+    }
+
+    .w-60 {
+      width: 60% !important;
+    }
+
+    .login-left-side {
+      background-color: var(--primary-color);
+    }
+
+    .owl-input {
+      padding: 0.7em;
+      border-radius: .6rem;
+      border: 1px solid lightgrey;
+      width: 350px;
+      background-repeat: no-repeat;
+      background-position: 5% center;
+      background-size: 24px;
+      padding-left: calc(5% + 24px + 12px) !important;
+      transition: background-position 5000s ease-in-out 0s !important;
+      transform: translateX(-24px);
+      margin-bottom: 1rem;
+    }
+
+    .field-container .has-error .owl-input {
+        margin-bottom: 0;
+    }
+
+    .field-container {
+      width: 350px !important;
+    }
+
+    .input-icon.envelope {
+      background-image: url('../static/core/assets/icons/envelope-primary.svg') !important;
+    }
+
+    .input-icon.shield-lock {
+      background-image: url('../static/core/assets/icons/shield-lock-primary.svg') !important;
+    }
+
+    .input-icon.shield-check {
+      background-image: url('../static/core/assets/icons/shield-check-primary.svg') !important;
+    }
+
+    .input-icon.person {
+      background-image: url('../static/core/assets/icons/person-primary.svg') !important;
+    }
+
+    .input-icon.person-check {
+      background-image: url('../static/core/assets/icons/person-check-primary.svg') !important;
+    }
+
+    .input-icon.person-square {
+      background-image: url('../static/core/assets/icons/person-square-primary.svg') !important;
+    }
+
+    .input-icon {
+      margin-bottom: 1rem;
+      width: fit-content !important;
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+      width: 24px !important;
+      transform: translateX(calc(18px ));
+      border: none;
+      z-index: 100;
+    }
+
+    .w-350px {
+      width: 350px !important;
+    }
+
+    .invalid-feedback {
+      display: block !important;
+      margin-bottom: 1rem;
+    }
+
+
+    .has-error .owl-input:not(.input-icon) {
+      border: 1px solid var(--bs-danger);
+    }
+
+    .login-button {
+      margin-right: 24px;
+    }
+
+    @media(max-width: 800px) {
+      .login-container {
+        flex-direction: column;
+      }
+
+      .login-right-side {
+        width: 100% !important;
+        height: fit-content !important;
+      }
+
+      .login-left-side {
+        width: 100% !important;
+        height: fit-content !important;
+        padding: 1rem;
+
+      }
+
+      .login-title {
+        padding-top: 2rem;
+      }
+    }
+
+    @media(max-width: 425px) {
+      .owl-input:not(.input-icon) {
+        width: 300px !important;
+      }
+
+      .login-button {
+        width: 300px !important;
+      }
+
+      .field-container {
+        width: 300px !important;
+      }
+    }
+
+
+    @media(max-width: 360px) {
+      .owl-input:not(.input-icon) {
+        width: 250px !important;
+      }
+
+      .login-button {
+        width: 250px !important;
+      }
+
+      .field-container {
+        width: 250px !important;
+      }
+
+      .login-left-side h2 {
+        font-size: 1.75rem !important;
+      }
+
+      .login-title {
+        font-size: 1.5rem !important;
+      }
+    }
+  </style>
+{% endblock extra_css %}
+
+
+{% block content %}
+  <div class="d-flex h-100 login-container">
+
+    <!-- LEFT -->
+    <div class="login-left-side w-40 h-100 d-flex justify-content-center align-content-center flex-column shadow">
+      <div class="d-flex flex-column flex-sm-row text-center justify-content-center">
+        <img src="{% static 'core/images/owlLOGO.png' %}" alt="Logo" width="72" height="72" class="align-self-center me-0 me-sm-2">
+        <h2 class="display-6 text-white text-center align-self-center">
+          Owl Inspection Services™
+        </h2>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="login-right-side w-60 h-100 justify-content-center d-flex align-content-center flex-column">
+        <a class="display-4 text-decoration-none text-dark text-center mb-5 login-title me-5" href="">
+          <img src="{% static 'core/images/walkingowl.png' %}" width="80">
+          <div class="d-inline">Create Account</div>
+        </a>
+      <form method="post" class="mt-3 mx-auto d-flex flex-column justify-content-center">
+        {% csrf_token %}
+
+        {% for field in form %}
+          <div class="d-flex justify-content-center align-self-center flex-column field-container">
+            <div class="d-flex{% if field.errors %} has-error{% endif %} align-self-center">
+              <div class="owl-input input-icon {{ field.field.widget.attrs.icon }}"></div>
+              {{ field }}
+            </div>
+            {% for error in field.errors %}
+                <div class="d-none invalid-feedback{% if forloop.last %} mb-2{% endif %}">{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <button class="btn btn-lg btn-primary w-350px mt-4 mb-3 login-button" type="submit">Create Account</button>
+        <div class="form-text">
+          Forgot your password? <a href="" id="forgotPasswordLink">Reset</a>
+        </div>
+        <div class="form-text">
+          Already have an account? <a href="{% url 'login' %}" id="signUpLink">Login!</a>
+        </div>
+        <div class="form-text">
+          Go <a href="{% url 'home' %}">Home!</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock content %}
